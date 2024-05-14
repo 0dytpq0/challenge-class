@@ -165,6 +165,10 @@ function App() {
 ![alt text](image-1.png)
 ![alt text](image-2.png)
 
+- Mounting = 컴포넌트가 브라우즈에 딱 장착되는 것
+- Updating = 마운트된 후에 업데이트 되는 것
+- Unmount = 페이지 나감? unmount
+
 ---
 
 ## 08. 주특기 입문 주차 학습 목표
