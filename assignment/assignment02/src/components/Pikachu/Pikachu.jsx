@@ -11,21 +11,20 @@ function Pikachu() {
       switch (event.key) {
         case "ArrowUp":
           event.preventDefault();
-          setLocationY((prevY) => Math.max(prevY - 30, 0));
+          setLocationY((prev) => Math.max(prev - 30, 0));
           break;
         case "ArrowDown":
           event.preventDefault();
-
-          setLocationY((prevY) => Math.min(prevY + 30, 300));
+          setLocationY((prev) => Math.min(prev + 30, 300));
 
           break;
         case "ArrowLeft":
           event.preventDefault();
-          setLocationX((prevX) => Math.max(prevX - 30, 0));
+          setLocationX((prev) => Math.max(prev - 30, 0));
           break;
         case "ArrowRight":
           event.preventDefault();
-          setLocationX((prevX) => Math.min(prevX + 30, 300));
+          setLocationX((prev) => Math.min(prev + 30, 300));
           break;
         case " ":
           event.preventDefault();
