@@ -29,7 +29,7 @@ function Pikachu() {
           break;
         case " ":
           event.preventDefault();
-          if (!isJumping) {
+          if (!isJumping && locationY) {
             setIsJumping(true);
             setTimeout(() => setIsJumping(false), 500);
           }
