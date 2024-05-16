@@ -26,11 +26,11 @@ function Pikachu() {
           event.preventDefault();
           setLocationX((prev) => Math.min(prev + 30, 300));
           break;
-        case " ":
+        case " " || "Spacebar":
           event.preventDefault();
           if (!isJumping && locationY) {
             setIsJumping(true);
-            setTimeout(() => setIsJumping(false), 500);
+            setTimeout(() => setIsJumping(false), 1000);
           }
           break;
       }
@@ -49,8 +49,6 @@ function Pikachu() {
         id="Pikachu"
         className={isJumping ? "jumping" : ""}
         style={{
-          "--x": `${locationX}px`,
-          "--y": `${locationY}px`,
           transform: `translate(${locationX}px, ${locationY}px)`,
         }}
       ></div>

@@ -19,17 +19,17 @@
   background-repeat: no-repeat;
 }
 .jumping {
-  animation: jump 0.5s;
+  animation: jump 1s;
 }
 
 @keyframes jump {
   0% {
-    transform: translate(var(--x), var(--y)) translateY(0);
+    translate: 0% 0%;
   }
   50% {
-    transform: translate(var(--x), var(--y)) translateY(-30px); /* 점프 높이 */
+    translate: 0% -1000%;
   }
   100% {
-    transform: translate(var(--x), var(--y)) translateY(0);
+    translate: 0% 0%;
   }
 }
