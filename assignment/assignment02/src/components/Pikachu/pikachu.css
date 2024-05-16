@@ -1,0 +1,35 @@
+#Grass {
+  position: relative;
+  width: 330px;
+  height: 330px;
+  margin: 0 auto;
+  background: url(../../../public/grass.png);
+  background-size: 20%;
+  background-repeat: repeat;
+}
+
+#Pikachu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  background: url(../../../public/pikachu.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.jumping {
+  animation: jump 0.5s;
+}
+
+@keyframes jump {
+  0% {
+    transform: translate(var(--x), var(--y)) translateY(0);
+  }
+  50% {
+    transform: translate(var(--x), var(--y)) translateY(-30px); /* 점프 높이 */
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) translateY(0);
+  }
+}
