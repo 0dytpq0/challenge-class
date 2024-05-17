@@ -5,6 +5,7 @@ function Pikachu() {
   const [locationX, setLocationX] = useState(0);
   const [locationY, setLocationY] = useState(0);
   const [isJumping, setIsJumping] = useState(false);
+  const [direction, setDirection] = useState("right");
   const grassRef = useRef(null);
 
   const handlePikachuMove = (event) => {
@@ -15,16 +16,18 @@ function Pikachu() {
         break;
       case "ArrowDown":
         event.preventDefault();
-        setLocationY((prev) => Math.min(prev + 30, 300));
+        setLocationY((prev) => Math.min(prev + 30, 270));
 
         break;
       case "ArrowLeft":
         event.preventDefault();
         setLocationX((prev) => Math.max(prev - 30, 0));
+        setDirection("left");
         break;
       case "ArrowRight":
         event.preventDefault();
-        setLocationX((prev) => Math.min(prev + 30, 300));
+        setLocationX((prev) => Math.min(prev + 30, 270));
+        setDirection("right");
         break;
       case " " || "Spacebar":
         event.preventDefault();
@@ -50,9 +53,11 @@ function Pikachu() {
     >
       <div
         id="Pikachu"
-        className={isJumping ? "jumping" : ""}
+        className={`${isJumping ? "jumping" : ""}`}
         style={{
-          transform: `translate(${locationX}px, ${locationY}px)`,
+          transform: `translate(${locationX}px, ${locationY}px) rotateY(${
+            direction === "left" ? 180 : 0
+          }deg)`,
         }}
       ></div>
     </div>
