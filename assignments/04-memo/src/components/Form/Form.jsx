@@ -44,23 +44,6 @@ function Form() {
     dispatch(action);
   };
 
-  const makeMemoList = () => {
-    const memos = selector.map((item) => {
-      const memoId = uuid();
-      return (
-        <div key={memoId}>
-          <MemoList clicked={item.isClicked}>
-            <Li onClick={() => clickMemo(item)}>
-              <span>{item.text}</span>
-              <span>{item.hour}</span>
-            </Li>
-          </MemoList>
-        </div>
-      );
-    });
-
-    return memos;
-  };
   const handleCreateMemo = (e) => {
     e.preventDefault();
     const memoId = uuid();
@@ -78,6 +61,24 @@ function Form() {
     setCurMemo(memoId);
     setTextareaValue("");
     dispatch(action);
+  };
+
+  const makeMemoList = () => {
+    const memos = selector.map((item) => {
+      const memoId = uuid();
+      return (
+        <div key={memoId}>
+          <MemoList clicked={item.isClicked}>
+            <Li onClick={() => clickMemo(item)}>
+              <span>{item.text}</span>
+              <span>{item.hour}</span>
+            </Li>
+          </MemoList>
+        </div>
+      );
+    });
+
+    return memos;
   };
 
   const changeTextarea = (e) => {
