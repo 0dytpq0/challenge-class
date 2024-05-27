@@ -16,7 +16,7 @@ export const Li = styled.li`
   height: 56px;
   border-radius: 4px;
   background-color: ${(props) =>
-    props.clicked ? "rgb(255, 224, 127);" : "rgb(255,255,255)"};
+    props.$isSelected ? "rgb(255, 224, 127);" : "rgb(255,255,255)"};
   width: 100%;
   padding: 12px 24px;
   cursor: pointer;

@@ -1,42 +1,20 @@
-const markeHourString = (hour) => {
-  const hourString = hour.toString().padStart(2, "0");
-  return hourString;
-};
+// Date.now()로 비교 가능한 시간을 기본 값으로 준 후 해당 값을 new Date의 파라미터로 주면
+// 그 시간, 날짜를 얻을 수가 있음
+export function formatDateTime(dateTime, longOrShort) {
+  dateTime = dateTime ? new Date(dateTime) : new Date();
+  const isAfterNoon = dateTime.getHours() >= 12;
+  const 오전or오후 = isAfterNoon ? "오후" : "오전";
+  const fullYear = dateTime.getFullYear();
+  const month = dateTime.getMonth() + 1;
+  const date = dateTime.getDate();
+  const hours = dateTime.getHours() - (isAfterNoon ? 12 : 0);
+  const minutes = dateTime.getMinutes().toString().padStart(2, "0");
 
-export const getTime = () => {
-  const today = new Date();
-  const hour = today.getHours();
-  const minute = today.getMinutes().toString().padStart(2, "0");
-  if (hour >= 12) {
-    const string = `오후 ${
-      hour === 12 ? 12 : markeHourString(hour - 12)
-    }:${minute}`;
-    return string;
+  if (longOrShort === "short") {
+    return `${오전or오후} ${hours}:${minutes}`;
+  } else if (longOrShort === "long") {
+    return `${fullYear}년 ${month}월 ${date}일, ${오전or오후} ${hours}:${minutes}`;
   } else {
-    const string = `오전 ${
-      hour === 24 ? "00" : markeHourString(hour)
-    }:${minute}`;
-    return string;
+    return alert("wrong args");
   }
-};
-
-export const getToday = () => {
-  const today = new Date();
-  const hour = today.getHours();
-  const minute = today.getMinutes().toString().padStart(2, "0");
-  //2024년 4월 26일, 오후 4:33
-  const year = today.getFullYear();
-  const month = ("0" + (today.getMonth() + 1)).slice(-2);
-  const day = ("0" + today.getDate()).slice(-2);
-  if (hour >= 12) {
-    const string = `${year}년 ${month}월 ${day}일, 오후 ${
-      hour === 12 ? 12 : markeHourString(hour - 12)
-    }:${minute}`;
-    return string;
-  } else {
-    const string = `${year}년 ${month}월 ${day}일, 오전 ${
-      hour === 24 ? "00" : markeHourString(hour)
-    }:${minute}`;
-    return string;
-  }
-};
+}

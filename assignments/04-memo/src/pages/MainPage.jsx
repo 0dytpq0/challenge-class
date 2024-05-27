@@ -13,7 +13,6 @@ function MainPage() {
         alignItems: "center",
       }}
     >
-      {/* <Form /> */}
       <AppWrapper>
         <MemoList />
         <MemoEditor />
