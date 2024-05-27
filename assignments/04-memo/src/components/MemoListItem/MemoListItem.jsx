@@ -10,7 +10,7 @@ function MemoListItem({ memo }) {
   const date = memo.hour;
 
   const clickMemo = () => {
-    const action = { type: focusMemo, payload: memo };
+    const action = focusMemo(memo);
     dispatch(action);
   };
 

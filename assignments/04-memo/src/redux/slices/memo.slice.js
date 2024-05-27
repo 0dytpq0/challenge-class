@@ -28,7 +28,6 @@ const memoSlice = createSlice({
       state.selectedId = newMemo.id;
     },
     updateMemo: (state, action) => {
-      console.log("action.payload", action.payload);
       state.dataList.find((memo) => memo.id === action.payload.memoId).text =
         action.payload.text;
     },
@@ -39,7 +38,6 @@ const memoSlice = createSlice({
     },
     focusMemo: (state, action) => {
       state.selectedId = action.payload.id;
-      console.log("", action.payload);
     },
   },
 });
