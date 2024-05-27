@@ -65,16 +65,15 @@ function Form() {
 
   const makeMemoList = () => {
     const memos = selector.map((item) => {
-      const memoId = uuid();
       return (
-        <div key={memoId}>
-          <MemoList clicked={item.isClicked}>
-            <Li onClick={() => clickMemo(item)}>
-              <span>{item.text}</span>
-              <span>{item.hour}</span>
-            </Li>
-          </MemoList>
-        </div>
+        <>
+          {/* <MemoList clicked={item.isClicked}> */}
+          <Li clicked={item.isClicked} onClick={() => clickMemo(item)}>
+            <span>{item.text}</span>
+            <span>{item.hour}</span>
+          </Li>
+          {/* </MemoList> */}
+        </>
       );
     });
 
@@ -100,7 +99,7 @@ function Form() {
           <button onClick={handleCreateMemo}>새 메모 작성하기</button>
           <button onClick={clickDelete}>삭제</button>
         </ButtonBox>
-        {makeMemoList()}
+        <MemoList>{makeMemoList()}</MemoList>
       </LeftSide>
       <RightSide>
         <span>{getToday()}</span>
@@ -188,32 +187,30 @@ const MemoList = styled.ul`
   row-gap: 8px;
   margin: 0px;
   overflow-x: hidden;
-  > li {
-    height: 56px;
-    border-radius: 4px;
-    background-color: ${(props) =>
-      props.clicked ? "rgb(255, 224, 127);" : "rgb(255,255,255)"};
-    width: 100%;
-    padding: 12px 24px;
-    cursor: pointer;
-
-    span:first-child {
-      margin: 0px 0px 2px;
-      font-size: 13px;
-      font-weight: 700;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-    span:last-child {
-      font-size: 12px;
-      color: rgb(64, 64, 64);
-    }
-  }
 `;
 const Li = styled.li`
   display: flex;
   flex-direction: column;
+  height: 56px;
+  border-radius: 4px;
+  background-color: ${(props) =>
+    props.clicked ? "rgb(255, 224, 127);" : "rgb(255,255,255)"};
+  width: 100%;
+  padding: 12px 24px;
+  cursor: pointer;
+
+  span:first-child {
+    margin: 0px 0px 2px;
+    font-size: 13px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  span:last-child {
+    font-size: 12px;
+    color: rgb(64, 64, 64);
+  }
 `;
 
 export default Form;

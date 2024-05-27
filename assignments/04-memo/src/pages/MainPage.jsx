@@ -1,4 +1,6 @@
-import Form from "../components/Form";
+import MemoEditor from "../components/MemoEditor";
+import MemoList from "../components/MemoList";
+import AppWrapper from "../components/Wrapper/AppWrapper";
 
 function MainPage() {
   return (
@@ -11,7 +13,11 @@ function MainPage() {
         alignItems: "center",
       }}
     >
-      <Form />
+      {/* <Form /> */}
+      <AppWrapper>
+        <MemoList />
+        <MemoEditor />
+      </AppWrapper>
     </div>
   );
 }

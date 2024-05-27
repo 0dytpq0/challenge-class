@@ -2,46 +2,54 @@ import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
 import { getTime } from "../../utils/getTime";
 
+const initialMemoId = uuid();
 const initialState = {
   dataList: [
     {
-      id: uuid(),
+      id: initialMemoId,
       hour: getTime(),
-      text: "새로운 메모",
-      textareaValue: "",
-      isClicked: true,
+      text: "",
     },
   ],
+  selectedId: initialMemoId,
 };
 
 const memoSlice = createSlice({
   name: "memo",
   initialState,
   reducers: {
-    createMemo: (state, action) => {
-      const newDataList = [action.payload, ...state.dataList];
-      state.dataList = newDataList.map((item) =>
-        item.id === action.payload.id
-          ? { ...item, isClicked: true }
-          : { ...item, isClicked: false }
-      );
+    createMemo: (state) => {
+      const newMemo = {
+        id: uuid(),
+        hour: getTime(),
+        text: "",
+      };
+
+      state.dataList = [newMemo, ...state.dataList];
+      state.selectedId = newMemo.id;
     },
     updateMemo: (state, action) => {
-      state.dataList = action.payload;
+      const newMemos = state.dataList.map((memo) => {
+        return memo.id === action.payload.id
+          ? { ...memo, text: action.payload.text }
+          : { ...memo };
+      });
+      state = {
+        ...state,
+        dataList: newMemos,
+      };
     },
     deleteMemo: (state, action) => {
-      state.dataList = action.payload;
+      const newDataList = state.dataList.filter(
+        (memo) => memo.id !== action.payload.id
+      );
+
+      state.dataList = newDataList;
+      state.selectedId = newDataList[0].id;
     },
     focusMemo: (state, action) => {
-      const memos = state.dataList.map((item) => {
-        console.log("action.payload", action.payload.id);
-        if (item.id !== action.payload.id) {
-          return { ...item, isClicked: false };
-        } else {
-          return { ...item, isClicked: true };
-        }
-      });
-      state.dataList = memos;
+      state = { ...state, selectedId: action.payload.id };
+      console.log("", action.payload);
     },
   },
 });
