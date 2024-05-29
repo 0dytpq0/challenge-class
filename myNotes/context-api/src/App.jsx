@@ -1,13 +1,16 @@
 import "./App.css";
 import Button from "./components/Button";
 import Display from "./components/Display";
+import { AuthProvider } from "./contexts/auth.context";
 
 function App() {
   return (
-    <main>
-      <Display />
-      <Button />
-    </main>
+    <AuthProvider>
+      <main>
+        <Display />
+        <Button />
+      </main>
+    </AuthProvider>
   );
 }
 
