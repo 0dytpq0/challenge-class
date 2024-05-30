@@ -1,5 +1,5 @@
-import { Form } from "react-router-dom";
 import "./App.css";
+import Form from "./components/Form/Form";
 import { FormProvider } from "./contexts/form.context";
 
 function App() {
