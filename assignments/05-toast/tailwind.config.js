@@ -5,12 +5,12 @@ export default {
     extend: {
       keyframes: {
         slideIn: {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(0)' }
+          '0%': { transform: 'translateX(110%)' },
+          '100%': { transform: 'translateX()' }
         },
         slideOut: {
           '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(100%)' }
+          '100%': { transform: 'translateX(110%)' }
         }
       },
       animation: {

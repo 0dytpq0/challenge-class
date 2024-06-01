@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid';
 import { useForm } from '../../contexts/form.context';
 import { useToast } from '../../contexts/toast.context';
 
@@ -10,7 +11,9 @@ function Button({ type }) {
     toast.open({
       title: FormData.formTitle,
       content: FormData.formContent,
-      timer: FormData.formTimer
+      timer: FormData.formTimer,
+      id: uuid(),
+      space: 0
     });
   };
 

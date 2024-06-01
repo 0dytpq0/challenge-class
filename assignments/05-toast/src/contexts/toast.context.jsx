@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
 import Toast from '../components/Toast/Toast';
 
 const initialValue = {
@@ -11,23 +11,44 @@ const ToastContext = createContext(initialValue);
 export const useToast = () => useContext(ToastContext);
 
 function ToastProvider({ children }) {
-  const [modalOptions, setModalOptions] = useState(null);
+  const [modalOptions, setModalOptions] = useState([]);
+  const close = useCallback((id) => {
+    setModalOptions((prev) => prev.filter((option) => option.id !== id));
+  }, []);
 
   const value = {
     open: (options) => {
-      setModalOptions(options);
-      console.log(options);
-      setTimeout(() => setModalOptions(null), options.timer);
+      setModalOptions((prev) => [
+        ...prev,
+        { ...options, space: modalOptions.length === 0 ? 10 : modalOptions.length * 10 }
+      ]);
+      setTimeout(() => close(options.id), options.timer);
     },
-    close: () => {
-      setModalOptions(null);
+    close: (id) => {
+      setModalOptions((prev) => prev.filter((option) => option.id !== id));
     }
   };
-  console.log(modalOptions);
+
+  const toastList = () => {
+    return modalOptions.map((item) => {
+      console.log('space', item.space);
+      return (
+        <Toast
+          key={item.id}
+          id={item.id}
+          title={item.title}
+          content={item.content}
+          timer={item.timer}
+          space={item.space}
+        />
+      );
+    });
+  };
+
   return (
     <ToastContext.Provider value={value}>
       {children}
-      {modalOptions && <Toast title={modalOptions.title} content={modalOptions.content} timer={modalOptions.timer} />}
+      {modalOptions && toastList()}
     </ToastContext.Provider>
   );
 }
