@@ -1,18 +1,23 @@
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useToast } from '../../contexts/toast.context';
 
 //use effect로 ~초 후 false를 리턴해주는 값을 넣어
 // 해당 값이 false가 되면 animate-slideIn은 animate-sildeOut이 되는거임.
 
+const isSlideIn = (isSlideIn) => {
+  return isSlideIn ? 'animate-slideOut' : ' animate-slideIn';
+};
+
 function Toast({ id, title, content, timer, space }) {
-  const [isTrue, setIsTrue] = useState(false);
+  const [isSlide, setIsSlide] = useState(false);
   console.log('space', space);
   useEffect(() => {
-    setTimeout(() => setIsTrue(true), timer - 500);
+    setTimeout(() => setIsSlide(true), timer - 500);
   }, [timer]);
   const toast = useToast();
   return (
-    <div key={id} className={`${toastContainer} ${isTrue ? 'animate-slideOut' : 'animate-slideIn'}`}>
+    <div key={id} className={clsx(`${toastContainer} ${isSlideIn(isSlide)}`)}>
       <article className={articleStyle}>
         <h6 className={titleStyle}>{title}</h6>
         <p className={contentStyle}>{content}</p>

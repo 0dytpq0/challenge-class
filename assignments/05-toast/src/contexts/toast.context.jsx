@@ -24,9 +24,7 @@ function ToastProvider({ children }) {
       ]);
       setTimeout(() => close(options.id), options.timer);
     },
-    close: (id) => {
-      setModalOptions((prev) => prev.filter((option) => option.id !== id));
-    }
+    close: close
   };
 
   const toastList = () => {

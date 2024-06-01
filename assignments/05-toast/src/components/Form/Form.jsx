@@ -4,7 +4,6 @@ import Button from '../Button/Button';
 
 function Form() {
   const formData = useForm();
-  console.log('formn 렌더링');
 
   return (
     <div className={containerStyle}>
