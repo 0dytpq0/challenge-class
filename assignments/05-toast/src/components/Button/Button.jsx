@@ -1,23 +1,26 @@
-import { useForm } from "../../contexts/form.context";
-import { useModal } from "../../contexts/modal.context";
+import { useForm } from '../../contexts/form.context';
+import { useToast } from '../../contexts/toast.context';
 
 function Button({ type }) {
-  const modal = useModal();
+  const toast = useToast();
   const FormData = useForm();
   const handleClickButton = (e) => {
     e.preventDefault();
-    modal.open({
+    //space를 넣어서 넣을때마다 + 30정도 해줘서 위로 올리고 아래 새로 추가하기
+    toast.open({
       title: FormData.formTitle,
       content: FormData.formContent,
-      timer: FormData.formTimer,
+      timer: FormData.formTimer
     });
   };
 
   return (
-    <button type={type} onClick={handleClickButton}>
+    <button className={buttonStyle} type={type} onClick={handleClickButton}>
       토스트 띄우기
     </button>
   );
 }
+
+const buttonStyle = `w-full bg-black text-white h-14 rounded-lg`;
 
 export default Button;
