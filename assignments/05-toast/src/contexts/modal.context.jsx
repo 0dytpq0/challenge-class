@@ -12,14 +12,11 @@ export const useModal = () => useContext(ModalContext);
 
 function ModalProvider({ children }) {
   const [modalOptions, setModalOptions] = useState(null);
-  // const timeOut = useTimeOut;
 
   const value = {
     open: (options) => {
       setModalOptions(options);
       setTimeout(() => setModalOptions(null), options.timer);
-      // clear는 어디서 시키지? 꼭 해야하나?
-      // 무조건으 ㄴ아니고 언마운트
     },
     close: () => {
       setModalOptions(null);
