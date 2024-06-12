@@ -6,22 +6,21 @@ import api from "../api/api";
 function LogInPage() {
   const navigate = useNavigate();
   const { mutateAsync: logIn } = useMutation({
-    mutationFn: (data) => {
-      api.auth.logIn(data);
+    mutationFn: async (data) => {
+      await api.auth.logIn(data);
     },
   });
 
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
 
-  const handleClickSignUp = async () => {
+  const handleClickSignIn = async () => {
     try {
       const email = emailInputRef.current.value;
       const password = passwordInputRef.current.value;
       const data = { email, password };
 
       await logIn(data);
-
       alert("로그인 완료");
       navigate("/");
     } catch {
@@ -41,7 +40,7 @@ function LogInPage() {
         placeholder="비밀번호를 입력해 주세요"
         type="password"
       />
-      <button onClick={handleClickSignUp}>로그인하기</button>
+      <button onClick={handleClickSignIn}>로그인하기</button>
     </div>
   );
 }

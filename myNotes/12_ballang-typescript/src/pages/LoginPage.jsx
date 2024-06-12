@@ -3,30 +3,29 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 
-function SignUpPage() {
+function LogInPage() {
   const navigate = useNavigate();
-  const { mutateAsync: signUp } = useMutation({
+  const { mutateAsync: logIn } = useMutation({
     mutationFn: async (data) => {
-      await api.auth.signUp(data);
+      await api.auth.logIn(data);
     },
   });
 
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
 
-  const handleClickSignUp = async () => {
+  const handleClickSignIn = async () => {
     try {
       const email = emailInputRef.current.value;
       const password = passwordInputRef.current.value;
       const data = { email, password };
-      console.log("data", data);
 
-      await signUp(data);
+      await logIn(data);
 
-      alert("회원가입 완료");
+      alert("로그인 완료");
       navigate("/");
     } catch {
-      alert("회원가입 실패");
+      alert("로그인 실패");
     }
   };
 
@@ -42,9 +41,9 @@ function SignUpPage() {
         placeholder="비밀번호를 입력해 주세요"
         type="password"
       />
-      <button onClick={handleClickSignUp}>회원가입하기</button>
+      <button onClick={handleClickSignIn}>로그인하기</button>
     </div>
   );
 }
 
-export default SignUpPage;
+export default LogInPage;
