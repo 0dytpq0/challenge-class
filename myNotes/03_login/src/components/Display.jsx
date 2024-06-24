@@ -1,3 +1,4 @@
+import { Map } from "react-kakao-maps-sdk";
 import { useSelector } from "react-redux";
 
 function Display() {
@@ -9,8 +10,29 @@ function Display() {
   const status = isLoggedIn ? "로그인" : "로그아웃";
 
   return (
-    <div style={{ borderBottom: "1px solid black" }}>
+    <div
+      style={{
+        borderBottom: "1px solid black",
+        width: "1000px",
+        height: "1000px",
+      }}
+    >
       현재 {status} 상태입니다.
+      {
+        <Map // 지도를 표시할 Container
+          center={{
+            // 지도의 중심좌표
+            lat: 33.450701,
+            lng: 126.570667,
+          }}
+          style={{
+            // 지도의 크기
+            width: "100%",
+            height: "450px",
+          }}
+          level={3} // 지도의 확대 레벨
+        />
+      }
     </div>
   );
 }

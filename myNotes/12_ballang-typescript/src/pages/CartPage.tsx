@@ -4,6 +4,7 @@ import api from "../api/api";
 function CartPage() {
   const queryClient = useQueryClient();
 
+  // cart 는 돌려주는 getCart()에서 타입을 지정해서 돌려줘야한다 ㅇㅇ!!!!!!
   const { data: cart, isLoading } = useQuery({
     queryKey: ["cart"],
     queryFn: () => api.cart.getCart(),

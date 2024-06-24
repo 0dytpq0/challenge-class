@@ -12,7 +12,6 @@ function Modal({ title, content }) {
         <p>{content}</p>
         <button onClick={() => modal.close()}>닫기</button>
       </article>
-      ;
     </Backdrop>
   );
 }
