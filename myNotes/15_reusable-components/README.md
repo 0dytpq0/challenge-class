@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+재사용 가능한 컴포넌트를 만드는 순서?
 
-## Getting Started
+1. 인터페이스 설계 => 쓰는 ㅅ ㅏ람이 어떻게 쓸지를 생각해보자
 
-First, run the development server:
+cva는 인자를 두개받는다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. 조합과 무관한 클레스들을 첫번째 인자로 넣어준다.
+2. 조합을 넣어준다.
+   //chipVariants는 함수
+
+```jsx
+const chipVariants = cva(["text-sm", "border", "rounded-full", "px-2.5", "py-0.5", "hover:opacity-50", "transition-opacity"], {
+  variants: {
+    intent: {
+      primary: "bg-blue-500 border-blue-500 text-white",
+      secondary: "bg-gray-500 border-gray-500 text-white",
+      danger: "bg-red-500 border-red-500 text-white",
+      warning: "bg-yellow-500 border-yellow-500 text-white",
+      info: "bg-violet-500 border-violet-500 text-white",
+      default: "bg-white-500 border-black-500 text-black",
+    },
+  },
+  defaultVariants: {
+    intent: "default",
+  },
+});
+
+function Chip({ label, intent }: ChipProps) {
+  // 난 나만의 칩을 위해 추가적 클래스네임을 줄거야!
+  //props로 className을 전달받으면? chipVariants({className, intent})
+  return <div className={chipVariants({ intent })}>{label}</div>;
+}
+
+export default function Home() {
+  return (
+    <div className="h-screen flex flex-col items-center justify-center place-items-center">
+      <Chip intent="Primary" label="primary" />
+      <Chip intent="Secondary" label="secondary" />
+      <Chip intent="Danger" label="danger" />
+      <Chip intent="Warning" label="warning" />
+      <Chip intent="Info" label="info" />
+      <Chip intent="default" label="default" />
+    </div>
+  );
+}
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
