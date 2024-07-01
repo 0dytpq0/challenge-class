@@ -4,9 +4,9 @@ import { ComponentProps, PropsWithChildren } from "react";
 const buttonVariant = cva("border rounded font-semibold hover:brightness-90 active:brightness-75", {
   variants: {
     intent: {
-      primary: " border-sky-500 text-white",
-      secondary: "bg-slate-500 border-slate-500 text-white",
-      danger: "bg-rose-500 border-rose-500 text-white",
+      primary: "border-sky-500 ",
+      secondary: "border-slate-500 ",
+      danger: "border-rose-500 ",
     },
     size: {
       sm: "px-3 py-1 text-[13px]",

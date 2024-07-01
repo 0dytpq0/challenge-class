@@ -44,3 +44,20 @@ export default function Home() {
   );
 }
 ```
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+cva + clsx + tailwind merge
+
+Input 컴포넌트가 size를 받는다?
+이 size가 label과 input에 영향을 준다 해볼게
+그럼 labelVariant, inputVariant 두개를 만들게 되잖아? 이를 className에 넣어줄텐데
+경우에 따라 하나에 대해서도 Variant를 여러개를 만들어줄 때가 있다.
+ex) inputColorVariant, inputSizeVariant
+
+그럴 경우엔 이 두가지를 합쳐줘야되잖아? 아래처럼 cx(clsx)가 내장되어있는데 이 때 같이 쓴다.
+input className ={cx(inputColorVariant({color}), inputVariant({size}))}
+
+tailwindMerge는 직접 확인 해볼것.

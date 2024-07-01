@@ -1,44 +1,43 @@
-"use client";
-
 import Button from "./components/Button";
 
 export default function Home() {
   return (
     <div className="h-screen flex flex-col items-center justify-center place-items-center gap-y-4">
-      <Button intent={"primary"} size="sm" onClick={() => alert("baa")}>
+      <Button intent="primary" size="sm">
         Primary
       </Button>
-      <Button intent={"primary"} size="md">
+
+      <Button intent="primary" size="md">
         Primary
       </Button>
-      <Button intent={"primary"} size="lg">
+      <Button intent="primary" size="lg">
         Primary
       </Button>
-      <Button intent={"primary"} size="lg" variant="outline">
+      <Button intent="primary" size="lg" variant="outline">
         Primary
       </Button>
-      <Button intent={"secondary"} size="sm">
+      <Button intent="secondary" size="sm">
         Secondary
       </Button>
-      <Button intent={"secondary"} size="md">
+      <Button intent="secondary" size="md">
         Secondary
       </Button>
-      <Button intent={"secondary"} size="lg">
+      <Button intent="secondary" size="lg">
         Secondary
       </Button>
-      <Button intent={"secondary"} size="lg" variant="outline">
+      <Button intent="secondary" size="lg" variant="outline">
         Secondary
       </Button>
-      <Button intent={"danger"} size="sm">
+      <Button intent="danger" size="sm">
         Danger
       </Button>
-      <Button intent={"danger"} size="md">
+      <Button intent="danger" size="md">
         Danger
       </Button>
-      <Button intent={"danger"} size="lg">
+      <Button intent="danger" size="lg">
         Danger
       </Button>
-      <Button intent={"danger"} size="lg" variant="outline">
+      <Button intent="danger" size="lg" variant="outline">
         Danger
       </Button>
       {/* Chip */}
