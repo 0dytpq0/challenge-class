@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+0703
 
-## Getting Started
+public에 있는 테이블과 어스 스키마에 있는 테이블이 조인했을 때 정보를 못가져오더라구요
 
-First, run the development server:
+-- 새로운 트리거 함수 생성
+CREATE OR REPLACE FUNCTION public.handle_new_user_custom() RETURNS TRIGGER AS $$ BEGIN INSERT INTO public.users (id, email) VALUES (NEW.id, NEW.email); RETURN NEW; END; $$ LANGUAGE plpgsql SECURITY DEFINER; -- 새로운 트리거 생성 CREATE TRIGGER on_auth_user_created_custom AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION public.handle_new_user_custom();
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+닉네임도 받고싶어요!
+-- 새로운 트리거 함수 생성
+CREATE OR REPLACE FUNCTION public.handle_new_user_custom() RETURNS TRIGGER AS $$ BEGIN INSERT INTO public.users (id, email, nickname) VALUES (NEW.id, NEW.email, NEW.raw_user_meta_data->>'nickname'); RETURN NEW; END; $$ LANGUAGE plpgsql SECURITY DEFINER; -- 새로운 트리거 생성 CREATE TRIGGER on_auth_user_created_custom AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION public.handle_new_user_custom();
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+닉네임을 메타데이터로 준거임 그래서 아래처럼 써주면 댐
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+const { data, error } = await supabase.auth.signUp({
+email: "example@email.com",
+password: "example-password",
+options: { data: { nickname: "튜터" } },
+});
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+DB 타입 가져오는법은 아래 링크에 있음
+https://supabase.com/docs/guides/api/rest/generating-types
 
-## Learn More
+'https://upwqcjdjqkzepwhivlpz.supabase.co/storage/v1/object/public/'
 
-To learn more about Next.js, take a look at the following resources:
+사진을 여러장 받으면 db를 어떻게 관리하나요?
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+사진을 model로 관리한다. => 테이블로 만들어서 url 넣어서 따로 관리한다.
